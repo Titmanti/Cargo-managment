@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargo Management</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="image.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="image.png">
+</head>
+<body>
+  <h1>Cargo Management</h1>
+  <form id="cargo-form">
+    <label>
+      Direction:
+      <input type="text" id="direction" required>
+    </label>
+    <br><br>
+    <label>
+      Unit:
+      <input type="text" id="unit" required>
+    </label>
+    <br><br>
+    <label>
+      Status:
+      <select id="status">
+        <option>TBD</option>
+        <option>Loaded, Rolling</option>
+        <option>At shipper</option>
+        <option>Loaded, waiting G2g</option>
+        <option>At receiver</option>
+        <option>Unloaded, waiting G2g</option>
+      </select>
+    </label>
+    <br><br>
+    <label>
+      Shippers:
+      <input type="text" id="shipper-id" placeholder="Shipper ID">
+      <input type="datetime-local" id="shipper-datetime">
+      <button type="button" onclick="addShipper()">Add Shipper</button>
+    </label>
+    <ul id="shippers-list"></ul>
+    <br>
+    <label>
+      Receivers:
+      <input type="text" id="receiver-id" placeholder="Receiver ID">
+      <input type="datetime-local" id="receiver-datetime">
+      <button type="button" onclick="addReceiver()">Add Receiver</button>
+    </label>
+    <ul id="receivers-list"></ul>
+    <br>
+    <label>
+      Notes:
+      <textarea id="notes"></textarea>
+    </label>
+    <br><br>
+    <button type="submit">Add Cargo</button>
+  </form>
+
+  <h2>Cargo List</h2>
+  <button onclick="copyAllCargos()">Copy All</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Direction</th>
+        <th>Unit</th>
+        <th>Status</th>
+        <th>Shippers</th>
+        <th>Receivers</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="cargo-table"></tbody>
+  </table>
+</body>
+<script src="scripts.js"></script>
+</html>
