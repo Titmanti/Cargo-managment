@@ -146,28 +146,31 @@ function deleteCargo(index) {
 
 function copyCargo(index) {
   const cargo = cargos[index];
-  const text = `
-    ${cargo.direction}
-    ${cargo.unit} - ${cargo.status}
-    ${cargo.shippers.map(s => `Pick Up #${s.id} - ${formatDatetime(s.datetime)}`).join('\n')}
-    ${cargo.receivers.map(r => `Delivery #${r.id} - ${formatDatetime(r.datetime)}`).join('\n')}
-    Notes: ${cargo.notes || 'No notes'}
-  `;
+  const text = [
+    `${cargo.direction}`,
+    `    ${cargo.unit} - ${cargo.status}`,
+    cargo.shippers.map(s => `    Pick Up #${s.id} - ${formatDatetime(s.datetime)}`).join('\n'),
+    cargo.receivers.map(r => `    Delivery #${r.id} - ${formatDatetime(r.datetime)}`).join('\n'),
+    `    Notes: ${cargo.notes || 'No notes'}`
+  ].filter(line => line.trim() !== '').join('\n');
+  
   navigator.clipboard.writeText(text.trim());
   alert('Cargo details copied to clipboard!');
 }
 
 function copyAllCargos() {
-  const text = cargos.map(cargo => `
-    ${cargo.direction}
-    ${cargo.unit} - ${cargo.status}
-    ${cargo.shippers.map(s => `Pick Up #${s.id} - ${formatDatetime(s.datetime)}`).join('\n')}
-    ${cargo.receivers.map(r => `Delivery #${r.id} - ${formatDatetime(r.datetime)}`).join('\n')}
-    Notes: ${cargo.notes || 'No notes'}
-  `).join('\n\n');
+  const text = cargos.map(cargo => [
+    `${cargo.direction}`,
+    `    ${cargo.unit} - ${cargo.status}`,
+    cargo.shippers.map(s => `    Pick Up #${s.id} - ${formatDatetime(s.datetime)}`).join('\n'),
+    cargo.receivers.map(r => `    Delivery #${r.id} - ${formatDatetime(r.datetime)}`).join('\n'),
+    `    Notes: ${cargo.notes || 'No notes'}`
+  ].filter(line => line.trim() !== '').join('\n')).join('\n\n');
+  
   navigator.clipboard.writeText(text.trim());
   alert('All cargo details copied to clipboard!');
 }
+
 
 
 renderCargos();
