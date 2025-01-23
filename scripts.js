@@ -151,6 +151,7 @@ function copyCargo(index) {
     ${cargo.unit} - ${cargo.status}
     ${cargo.shippers.map(s => `Pick Up #${s.id} - ${formatDatetime(s.datetime)}`).join('\n')}
     ${cargo.receivers.map(r => `Delivery #${r.id} - ${formatDatetime(r.datetime)}`).join('\n')}
+    Notes: ${cargo.notes || 'No notes'}
   `;
   navigator.clipboard.writeText(text.trim());
   alert('Cargo details copied to clipboard!');
@@ -162,9 +163,11 @@ function copyAllCargos() {
     ${cargo.unit} - ${cargo.status}
     ${cargo.shippers.map(s => `Pick Up #${s.id} - ${formatDatetime(s.datetime)}`).join('\n')}
     ${cargo.receivers.map(r => `Delivery #${r.id} - ${formatDatetime(r.datetime)}`).join('\n')}
+    Notes: ${cargo.notes || 'No notes'}
   `).join('\n\n');
   navigator.clipboard.writeText(text.trim());
   alert('All cargo details copied to clipboard!');
 }
+
 
 renderCargos();
